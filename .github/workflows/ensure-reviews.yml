@@ -66,5 +66,5 @@ jobs:
           restrictions: ${{ fromJson(null) }}
           required_status_checks: ${{ fromJson(null) }}
           enforce_admins: true
-          required_pull_request_reviews: '${{ toJson("{dismiss_stale_review: true}") }}'
+          required_pull_request_reviews: '${{ fromJson("{dismiss_stale_review: true}") }}'
           
