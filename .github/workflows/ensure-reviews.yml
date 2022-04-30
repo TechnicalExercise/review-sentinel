@@ -34,29 +34,18 @@ jobs:
       - name: Show the repo name
         run: | 
           echo 'repo name: ${{ github.repository_owner }}/${{ github.event.inputs.repo-name }}'
-
+      
       - name: Get repo
         id: get-repo
-        uses: octokit/request-action@v2.1.0
+        uses: octokit/request-action@v2.x
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.inputs.repo-name }}
         with:
-          # HTTP Verb + path as shown on https://developer.github.com/v3/
-          route: POST /repos/{owner}/{repo}/issues
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.inputs.repo-name }}
-          title: Issue Title
-          body: TBD
-      
-#       - name: Get repo
-#         id: get-repo
-#         uses: octokit/request-action@v2.x
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           route: GET /repos/{owner}/{repo}
-#           owner: ${{ github.repository_owner }}
-#           repo: ${{ github.event.inputs.repo-name }}
+          route: GET /repos/{owner}/{repo}
+          owner: ${{ env.OWNER }}
+          repo: ${{ env.REPO }} 
       
       - name: Show the repo data # should be default_branch
         run: |
