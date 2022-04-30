@@ -86,4 +86,8 @@ jobs:
           restrictions: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).restrictions) }}
           required_pull_request_reviews: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).required_pull_request_reviews) }}
           enforce_admins: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).enforce_admins.enabled) }}
-        
+          required_linear_history: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).required_linear_history.enabled) }}
+          allow_force_pushes: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).allow_force_pushes.enabled) }}
+          allow_deletions: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).allow_deletions.enabled) }}
+          required_conversation_resolution: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).required_conversation_resolution.enabled) }}
+          
