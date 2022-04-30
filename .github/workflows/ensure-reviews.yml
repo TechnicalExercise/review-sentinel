@@ -52,7 +52,7 @@ jobs:
 
       - name: Get default branch protection from template repo
         id: get-branch-protection-template
-        uses: octokit/request-actio@2.x
+        uses: octokit/request-action@2.x
         env:
           GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }} # ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
