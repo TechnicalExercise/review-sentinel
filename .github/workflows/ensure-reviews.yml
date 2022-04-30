@@ -50,21 +50,40 @@ jobs:
         run: |
           echo 'Default branch: ${{ fromJson(steps.get-repo.outputs.data).default_branch }}'
 
-      - name: Set branch protection
-        id: set-protection
-        uses: octokit/request-action@v2.x
+      - name: Get default branch protection from template repo
+        id: get-branch-protection-template
+        uses: octokit/request-actio@2.x
         env:
           GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }} # ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
-          REPO: ${{ github.event.inputs.repo-name }}
-          BRANCH: ${{ fromJson(steps.get-repo.outputs.data).default_branch }}
+          REPO: template
+          BRANCH: main
         with:
-          route: PUT /repos/{owner}/{repo}/branches/{branch}/protection
+          route: GET /repos/{owner}/{repo}/branches/{branch}/protection
           owner: ${{ env.OWNER }}
-          repo: ${{ env.REPO }}       
+          repo: ${{ env.REPO }} 
           branch: ${{ env.BRANCH }}
-          restrictions: ${{ fromJson(null) }}
-          required_status_checks: ${{ fromJson(null) }}
-          enforce_admins: true
-          required_pull_request_reviews: '${{ fromJson("{dismiss_stale_review: true}") }}'
+      
+      - name: Show template repo''s branch protection rules
+        run: |
+          echo "Branch protection rules\n\n"
+          echo "${{ fromJson(steps.get-branch-protection-template.outputs).data }}"
+          
+#       - name: Set branch protection
+#         id: set-protection
+#         uses: octokit/request-action@v2.x
+#         env:
+#           GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }} # ${{ secrets.GITHUB_TOKEN }}
+#           OWNER: ${{ github.repository_owner }}
+#           REPO: ${{ github.event.inputs.repo-name }}
+#           BRANCH: ${{ fromJson(steps.get-repo.outputs.data).default_branch }}
+#         with:
+#           route: PUT /repos/{owner}/{repo}/branches/{branch}/protection
+#           owner: ${{ env.OWNER }}
+#           repo: ${{ env.REPO }}       
+#           branch: ${{ env.BRANCH }}
+#           restrictions: ${{ fromJson(null) }}
+#           required_status_checks: ${{ fromJson(null) }}
+#           enforce_admins: true
+#           required_pull_request_reviews: '${{ fromJson("{dismiss_stale_review: true}") }}'
           
