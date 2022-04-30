@@ -36,6 +36,8 @@ jobs:
 
       - uses: octokit/request-action@v2.x
         id: get-repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           route: GET /repos/{owner}/{repo}
           owner: ${{ github.repository_owner }}
