@@ -84,5 +84,5 @@ jobs:
           branch: ${{ env.BRANCH }}
           restrictions: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).restrictions) }}
           required_pull_request_reviews: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).required_pull_request_reviews) }}
-          enforce_admins: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).enforce_admins) }}
+          enforce_admins: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).enforce_admins.enabled) }}
         
