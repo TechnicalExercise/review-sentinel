@@ -31,4 +31,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Show the repo name
-        run: echo 'Ensuring review process for ${{ github.event.inputs.repo-name }}
+        run: echo 'Ensuring review process for ${{ github.event.inputs.repo-name }}'
