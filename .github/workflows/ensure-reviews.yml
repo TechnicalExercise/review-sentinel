@@ -32,10 +32,12 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Show the repo name
-        run: echo 'hello world'
+        run: | 
+          echo 'repo name: ${{ github.repository_owner }}/${{ github.event.inputs.repo-name }}'
 
-      - uses: octokit/request-action@v2.x
+      - name: Get repo
         id: get-repo
+        uses: octokit/request-action@v2.x
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
