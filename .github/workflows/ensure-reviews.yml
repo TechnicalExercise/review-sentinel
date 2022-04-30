@@ -37,12 +37,16 @@ jobs:
 
       - name: Get repo
         id: get-repo
-        uses: octokit/request-action@v2.x
+        uses: octokit/request-action@v2.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          route: GET /orgs{org}/repos
-          org: ${{ github.repository_owner }}
+          # HTTP Verb + path as shown on https://developer.github.com/v3/
+          route: POST /repos/{owner}/{repo}/issues
+          owner: devopsjester
+          repo: workflow-experiments
+          title: Issue Title
+          body: TBD
       
 #       - name: Get repo
 #         id: get-repo
