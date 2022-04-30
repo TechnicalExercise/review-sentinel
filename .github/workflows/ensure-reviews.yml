@@ -82,7 +82,7 @@ jobs:
           owner: ${{ env.OWNER }}
           repo: ${{ env.REPO }}       
           branch: ${{ env.BRANCH }}
-          restrictions: ${{ fromJson(steps.get-branch-protection-template.outputs.data).restrictions }}
-          required_pull_request_reviews: ${{ fromJson(steps.get-branch-protection-template.outputs.data).required_pull_request_reviews }}
-          enforce_admins: ${{ fromJson(steps.get-branch-protection-template.outputs.data).enforce_admins }}
+          restrictions: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).restrictions) }}
+          required_pull_request_reviews: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).required_pull_request_reviews) }}
+          enforce_admins: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).enforce_admins) }}
         
