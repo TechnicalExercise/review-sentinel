@@ -15,7 +15,7 @@ on:
       repo-name:
         description: 'Name of the newly created repository'
         required: true
-      
+        default: 'repo1'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -43,8 +43,8 @@ jobs:
         with:
           # HTTP Verb + path as shown on https://developer.github.com/v3/
           route: POST /repos/{owner}/{repo}/issues
-          owner: devopsjester
-          repo: workflow-experiments
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.inputs.repo-name }}
           title: Issue Title
           body: TBD
       
