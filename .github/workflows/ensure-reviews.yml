@@ -41,9 +41,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          route: GET /repos/{owner}/{repo}
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.inputs.repo-name }}
+          route: GET /orgs{org}/repos
+          org: ${{ github.repository_owner }}
+      
+#       - name: Get repo
+#         id: get-repo
+#         uses: octokit/request-action@v2.x
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           route: GET /repos/{owner}/{repo}
+#           owner: ${{ github.repository_owner }}
+#           repo: ${{ github.event.inputs.repo-name }}
       
       - name: Show the repo data # should be default_branch
         run: |
