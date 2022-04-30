@@ -64,7 +64,7 @@ jobs:
           repo: ${{ env.REPO }} 
           branch: ${{ env.BRANCH }}
       
-      - name: Show template repo''s branch protection rules
+      - name: Show template repo branch protection rules
         run: |
           echo "Branch protection rules\n\n"
           echo "${{ fromJson(steps.get-branch-protection-template.outputs).data }}"
