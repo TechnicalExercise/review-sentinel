@@ -69,21 +69,20 @@ jobs:
         run: | 
           echo "rules: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data)) }}"
           
-#       - name: Set branch protection
-#         id: set-protection
-#         uses: octokit/request-action@v2.x
-#         env:
-#           GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }} # ${{ secrets.GITHUB_TOKEN }}
-#           OWNER: ${{ github.repository_owner }}
-#           REPO: ${{ github.event.inputs.repo-name }}
-#           BRANCH: ${{ fromJson(steps.get-repo.outputs.data).default_branch }}
-#         with:
-#           route: PUT /repos/{owner}/{repo}/branches/{branch}/protection
-#           owner: ${{ env.OWNER }}
-#           repo: ${{ env.REPO }}       
-#           branch: ${{ env.BRANCH }}
-#           restrictions: ${{ fromJson(null) }}
-#           required_status_checks: ${{ fromJson(null) }}
-#           enforce_admins: true
-#           required_pull_request_reviews: '${{ fromJson("{dismiss_stale_review: true}") }}'
-          
+      - name: Set branch protection
+        id: set-protection
+        uses: octokit/request-action@v2.x
+        env:
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }} # ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.inputs.repo-name }}
+          BRANCH: ${{ fromJson(steps.get-repo.outputs.data).default_branch }}
+        with:
+          route: PUT /repos/{owner}/{repo}/branches/{branch}/protection
+          owner: ${{ env.OWNER }}
+          repo: ${{ env.REPO }}       
+          branch: ${{ env.BRANCH }}
+          restrictions: ${{ fromJson(steps.get-branch-protection-template.outputs.data).restrictions }}
+          required_pull_request_reviews: ${{ fromJson(steps.get-branch-protection-template.outputs.data).required_pull_request_reviews }}
+          enforce_admins: ${{ fromJson(steps.get-branch-protection-template.outputs.data).enforce_admins }}
+        
