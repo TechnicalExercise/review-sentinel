@@ -43,6 +43,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.inputs.repo-name }}
       
-      - name: Show the repo default branch
+      - name: Show the repo data # should be default_branch
         run: |
-          echo 'Default branch:  ${{ fromJson(steps.get-repo.outputs.data).default_branch }}'
+          echo 'Default branch:'
+          echo '${{ fromJson(steps.get-repo.outputs.data) }}'
