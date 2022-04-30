@@ -49,5 +49,4 @@ jobs:
       
       - name: Show the repo data # should be default_branch
         run: |
-          echo 'Default branch:'
-          echo '${{ fromJson(steps.get-repo.outputs.data) }}'
+          echo 'Default branch: ${{ fromJson(steps.get-repo.outputs.data).default_branch }}'
