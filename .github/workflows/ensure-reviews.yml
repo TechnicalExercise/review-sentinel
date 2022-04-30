@@ -37,15 +37,24 @@ jobs:
       
       - name: Get repo
         id: get-repo
-        uses: octokit/request-action@v2.x
+        run: |
+          gh api \
+            -H "Accept: application/vnd.github.v3+json" \
+            /repos/$OWNER/$REPO
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
           REPO: ${{ github.event.inputs.repo-name }}
-        with:
-          route: GET /repos/{owner}/{repo}
-          owner: ${{ env.OWNER }}
-          repo: ${{ env.REPO }} 
+        
+#         uses: octokit/request-action@v2.x
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           OWNER: ${{ github.repository_owner }}
+#           REPO: ${{ github.event.inputs.repo-name }}
+#         with:
+#           route: GET /repos/{owner}/{repo}
+#           owner: ${{ env.OWNER }}
+#           repo: ${{ env.REPO }} 
       
       - name: Show the repo data # should be default_branch
         run: |
