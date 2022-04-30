@@ -38,6 +38,7 @@ jobs:
       - name: Get repo
         id: get-repo
         run: |
+          gh auth login --with-token ${{ env.GITHUB_TOKEN }}
           gh api \
             -H "Accept: application/vnd.github.v3+json" \
             /repos/$OWNER/$REPO
