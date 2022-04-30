@@ -63,5 +63,5 @@ jobs:
           route: PUT /repos/{owner}/{repo}/branches/{branch}/protection
           owner: ${{ env.OWNER }}
           repo: ${{ env.REPO }}       
-          branch: ${{ end.BRANCH }}
+          branch: ${{ env.BRANCH }}
           required_pull_request_reviews: '{ "require_code_owner_reviews": true, "required_approving_review_count": 1 }'
