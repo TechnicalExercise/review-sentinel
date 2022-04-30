@@ -43,6 +43,7 @@ jobs:
             /repos/$OWNER/$REPO
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          Accept: application/vnd.github.v3+json
           OWNER: ${{ github.repository_owner }}
           REPO: ${{ github.event.inputs.repo-name }}
         
