@@ -34,6 +34,9 @@ jobs:
           application_id: ${{ secrets.APPLICATION_ID }}
           application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
       
+      - name: Show context
+        run: |
+          echo "github context:\n ${{ toJson(fromJson( github )) }}"
       - name: Get repo
         id: get-repo
         uses: octokit/request-action@v2.x
