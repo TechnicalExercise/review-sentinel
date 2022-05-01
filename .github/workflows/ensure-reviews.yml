@@ -34,9 +34,9 @@ jobs:
           application_id: ${{ secrets.APPLICATION_ID }}
           application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
       
-#       - name: Show context
-#         run: |
-#           echo "github context: ${{ toJson(fromJson( github )) }}"
+      - name: Show context
+        run: |
+          echo "github context: ${{ toJson(fromJson( github.event )) }}"
           
       - name: Get repo
         id: get-repo
