@@ -35,8 +35,10 @@ jobs:
           application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
       
       - name: Show context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          echo "github context: ${{ toJson(fromJson( github.event )) }}"
+          echo "$GITHUB_CONTEXT"
           
       - name: Get repo
         id: get-repo
