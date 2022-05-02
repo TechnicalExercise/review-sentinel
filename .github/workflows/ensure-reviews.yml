@@ -127,14 +127,19 @@ jobs:
           GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
           OWNER: ${{ github.repository_owner }}
           REPO: ${{ github.event.client_payload.repo }}
+          BRANCH: ${{ fromJson(steps.get-repo.outputs.data).default_branch }}
         with:
           title: Protection rules for ${{env.BRANCH}}
           token: ${{ env.GITHUB_TOKEN }}
           org: ${{ env.OWNER }}
           repo: ${{ env.REPO }}
           assignees: ${{github.actor}}
-          body: ${{ steps.get-branch-protection-template.outputs.data }}
-          
+          body: |
+            Branch Protection rules:
+            ------------------------
+            ${{ steps.get-branch-protection-template.outputs.data }}
+            
+            @{{ github.actor }}
 #       - name: Notify me of branch protection
 #         uses: octokit/request-action@v2.x
 #         env:
