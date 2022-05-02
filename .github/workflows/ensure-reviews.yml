@@ -121,3 +121,44 @@ jobs:
           allow_deletions: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).allow_deletions.enabled) }}
           required_conversation_resolution: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).required_conversation_resolution.enabled) }}
           
+      - uses: dacbd/create-issue-action@v1
+        name: Create Issue about protection rules
+        env:
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.client_payload.repo }}
+          BRANCH: ${{ fromJson(steps.get-repo.outputs.data).default_branch }}
+        with:
+          title: Protection rules for ${{env.BRANCH}}
+          token: ${{ env.GITHUB_TOKEN }}
+          org: ${{ env.OWNER }}
+          repo: ${{ env.REPO }}
+          assignees: ${{github.actor}}
+          body: |
+            Branch Protection rules:
+            ------------------------
+            ${{ steps.get-branch-protection-template.outputs.data }}
+            
+            @${{ github.actor }}
+#       - name: Notify me of branch protection
+#         uses: octokit/request-action@v2.x
+#         env:
+#           GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }} # ${{ secrets.GITHUB_TOKEN }}
+#           OWNER: ${{ github.repository_owner }}
+#           REPO: ${{ github.event.client_payload.repo }}
+#           BRANCH: ${{ fromJson(steps.get-repo.outputs.data).default_branch }}
+#         with:
+#           route: POST /repos/{owner}/{repo}/issues
+#           owner: ${{ env.OWNER }}
+#           repo: ${{ env.REPO }}             
+#           title: "Protection rules for ${{env.BRANCH}}"
+#           body: "${{ steps.get-branch-protection-template.outputs.data }}"
+#           assignees: ["devopsjester"]
+      
+      
+      
+      
+      
+      
+      
+      
