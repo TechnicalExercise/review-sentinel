@@ -54,3 +54,11 @@ from the command line, make sure you are in the function's folder, and run ```fu
 ## Using Review Sentinel
 
 In order to activate Review Sentinel, simply create a new repository in the organization. The automation will take care of the rest. Please note that since this is a free-tier account, this will only work with public repositories.
+
+## Attributions
+
+In my solution I made use of the following 3rd party components:
+
+- OctoKit's [API re action](https://github.com/marketplace/actions/github-api-request)
+- Dacbd's [Create GitHub Issue action](https://github.com/marketplace/actions/create-github-issue)
+- Eben Zhang's [Gist on calling GitHub's API from PowerShell](https://gist.github.com/EbenZhang/f89113ccc04f90af5e41aa739c5e086a?msclkid=e7925e84c9d711ecab4b20ebe6f95e95)
