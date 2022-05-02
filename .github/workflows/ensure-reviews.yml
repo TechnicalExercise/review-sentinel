@@ -81,7 +81,7 @@ jobs:
           OWNER: ${{ github.repository_owner }}
           REPO: ${{ github.event.client_payload.repo }}          
         run: |
-          git clone https://${{env.GITHUB_TOKEN}}@github.com/${{env.OWNER}}/${{env.REPO}}.git
+          git clone https://${{github.actor}}:${{env.GITHUB_TOKEN}}@github.com/${{env.OWNER}}/${{env.REPO}}.git
           cd ${{env.REPO}}
           
           # Check if the repo is empty
