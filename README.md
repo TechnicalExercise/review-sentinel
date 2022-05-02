@@ -1,6 +1,6 @@
 # Introduction
 
-Review Sentinel is a solution for ensuring that proper reviews are being done to code being added into an organization's repositories.
+[Review Sentinel](https://github.com/TechnicalExercise/review-sentinel) is a solution for ensuring that proper reviews are being done to code being added into an organization's repositories.
 
 Review Sentinel has 2 primary components:
 
