@@ -123,9 +123,13 @@ jobs:
           
       - uses: dacbd/create-issue-action@v1
         name: Create Issue about protection rules
+        env:
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
+          OWNER: ${{ env.OWNER }}
+          REPO: ${{ env.REPO }}
         with:
           title: Protection rules for ${{env.BRANCH}}
-          token: ${{ steps.get_workflow_token.outputs.token }}
+          token: ${{ env.GITHUB_TOKEN }}
           org: ${{ env.OWNER }}
           repo: ${{ env.REPO }}
           assignees: ${{github.actor}}
