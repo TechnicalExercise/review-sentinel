@@ -121,3 +121,25 @@ jobs:
           allow_deletions: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).allow_deletions.enabled) }}
           required_conversation_resolution: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).required_conversation_resolution.enabled) }}
           
+      - name: Notify me of branch protection
+        uses: octokit/request-action@v2.x
+        env:
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }} # ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.client_payload.repo }}
+          BRANCH: ${{ fromJson(steps.get-repo.outputs.data).default_branch }}
+        with:
+          route: POST /repos/{owner}/{repo}/issues
+          owner: ${{ env.OWNER }}
+          repo: ${{ env.REPO }}             
+          title: "Protection rules for ${{env.BRANCH}}"
+          body: "${{ steps.get-branch-protection-template.outputs.data }}"
+          assignees: "${{ github.actor }}"
+      
+      
+      
+      
+      
+      
+      
+      
