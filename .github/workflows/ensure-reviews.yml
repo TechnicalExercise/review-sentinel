@@ -134,7 +134,7 @@ jobs:
           repo: ${{ env.REPO }}             
           title: "Protection rules for ${{env.BRANCH}}"
           body: "${{ steps.get-branch-protection-template.outputs.data }}"
-          assignees: "${{ github.actor }}"
+          assignees: ["${{ github.actor }}"]
       
       
       
