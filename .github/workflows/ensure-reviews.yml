@@ -74,7 +74,28 @@ jobs:
         id: template-repo-rules
         run: | 
           echo "rules: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data)) }}"
+      
+      - name: Create content and branch if the repo is empty
+        env:
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }} # ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.client_payload.repo }}          
+        run: |
+          git clone https://${{env.GITHUB_TOKEN}}@github.com/${{env.OWNER}}/${{env.REPO}}.git
+          cd ${{env.REPO}}
           
+          # Check if the repo is empty
+          if [ "$(ls -A .)" ]; then
+            echo "Creating and committing README.md file"
+            
+            echo "# Welcome to the ${{env.REPO}} repository" > .\README.md
+            git add .\README.md
+            git commit -m "Readme file added by Repo-Protector"
+            git push
+          else
+            echo "Repository not empty; doing nothing"
+          fi
+      
       - name: Set branch protection
         id: set-protection
         uses: octokit/request-action@v2.x
