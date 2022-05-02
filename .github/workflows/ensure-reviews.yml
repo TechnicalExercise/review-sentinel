@@ -139,7 +139,7 @@ jobs:
             ------------------------
             ${{ steps.get-branch-protection-template.outputs.data }}
             
-            @{{ github.actor }}
+            @${{ github.actor }}
 #       - name: Notify me of branch protection
 #         uses: octokit/request-action@v2.x
 #         env:
