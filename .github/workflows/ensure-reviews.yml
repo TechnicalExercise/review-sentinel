@@ -121,13 +121,15 @@ jobs:
           allow_deletions: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).allow_deletions.enabled) }}
           required_conversation_resolution: ${{ toJson(fromJson(steps.get-branch-protection-template.outputs.data).required_conversation_resolution.enabled) }}
           
-      - uses: nashmaniac/create-issue-action@v1.1
+      - uses: dacbd/create-issue-action@v1
         name: Create Issue about protection rules
         with:
           title: Protection rules for ${{env.BRANCH}}
           token: ${{ steps.get_workflow_token.outputs.token }}
+          org: ${{ env.OWNER }}
+          repo: ${{ env.REPO }}
           assignees: ${{github.actor}}
-          body: toJson(${{ steps.get-branch-protection-template.outputs.data }}
+          body: ${{ steps.get-branch-protection-template.outputs.data }}
           
 #       - name: Notify me of branch protection
 #         uses: octokit/request-action@v2.x
