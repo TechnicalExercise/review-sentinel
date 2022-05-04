@@ -2,7 +2,7 @@
 
 [Review Sentinel](https://github.com/TechnicalExercise/review-sentinel) is a solution for ensuring that proper reviews are being done to code being added into an organization's repositories.
 
-Review Sentinel has 2 primary components:
+Review Sentinel has 4 primary components:
 
 1. A sample repository named "template". This repository's default branch (main) is set with the branch protection policies that you want to apply to all **new** repositories. To change the rules, just change the repo's settings for branch protection policy, and these changes will apply to the new repositories from now on.
 2. A GitHub Actions workflow named [ensure-reviews](https://github.com/TechnicalExercise/review-sentinel/blob/main/.github/workflows/ensure-reviews.yml) that reads the template repo's branch protection settings and applies them to a repository when it is created. In order to ensure that new repos, empty or otherwise, can have the policies applied to them, the workflow will create a readme file as a first commit, if no other file exists. Finally, the workflow will create an **issue** in the repository, listing the rules that were set, as well as mentioning whoever created the repo.
